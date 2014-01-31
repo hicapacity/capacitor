@@ -33,6 +33,7 @@ group :doc do
 end
 
 gem 'devise'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
