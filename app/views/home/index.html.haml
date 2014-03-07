@@ -31,16 +31,20 @@
           %a.navbar-brand{href: "#"} Capacitor
         .navbar-collapse.collapse
           %ul.nav.navbar-nav.navbar-right
-            %li
-              %a{href: "#"} Dashboard
-            %li
-              %a{href: "#"} Settings
-            %li
-              %a{href: "#"} Profile
-            %li
-              %a{href: "#"} Help
-          %form.navbar-form.navbar-right
-            %input.form-control{placeholder: "Search...", type: "text"}/
+            - if current_user
+              %li
+                %a{href: "#"} Dashboard
+              %li
+                %a{href: "#"} Services
+              %li
+                %a{href: "#"} Outreach
+              %li
+                %a{href: "/profile"} Profile
+              %li
+                = link_to "#{current_user.email} - Logout", destroy_user_session_path, :method => :delete 
+            - else
+              %li
+                %a{href: "/users/sign_in"} Sign In
     .container-fluid
       .row
         .col-sm-3.col-md-2.sidebar
