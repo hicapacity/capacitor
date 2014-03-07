@@ -1,7 +1,205 @@
-%html
+!!!
+%html{lang: "en"}
   %head
-    %title Capacitor
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %meta{content: "", name: "description"}/
+    %meta{content: "", name: "author"}/
+    %link{href: "../../assets/ico/favicon.ico", rel: "shortcut icon"}/
+    %title Dashboard Template for Bootstrap
+    / Bootstrap core CSS
+    / Latest compiled and minified CSS
+    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :rel => "stylesheet"}
+    / Optional theme
+    = stylesheet_link_tag "application"
+    / Just for debugging purposes. Don't actually copy this line!
+    /[if lt IE 9] <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   %body
-    #container
-      .content
-        %p Index
+    .navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "#"} Capacitor
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{href: "#"} Dashboard
+            %li
+              %a{href: "#"} Settings
+            %li
+              %a{href: "#"} Profile
+            %li
+              %a{href: "#"} Help
+          %form.navbar-form.navbar-right
+            %input.form-control{placeholder: "Search...", type: "text"}/
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          %ul.nav.nav-sidebar
+            %li.active
+              %a{href: "#"} Overview
+            %li
+              %a{href: "#"} Reports
+            %li
+              %a{href: "#"} Analytics
+            %li
+              %a{href: "#"} Export
+          %ul.nav.nav-sidebar
+            %li
+              %a{href: ""} Nav item
+            %li
+              %a{href: ""} Nav item again
+            %li
+              %a{href: ""} One more nav
+            %li
+              %a{href: ""} Another nav item
+            %li
+              %a{href: ""} More navigation
+          %ul.nav.nav-sidebar
+            %li
+              %a{href: ""} Nav item again
+            %li
+              %a{href: ""} One more nav
+            %li
+              %a{href: ""} Another nav item
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          %h1.page-header Dashboard
+          .row.placeholders
+            .col-xs-6.col-sm-3.placeholder
+              %img.img-responsive{alt: "Generic placeholder thumbnail", "data-src" => "holder.js/200x200/auto/sky"}/
+              %h4 Label
+              %span.text-muted Something else
+            .col-xs-6.col-sm-3.placeholder
+              %img.img-responsive{alt: "Generic placeholder thumbnail", "data-src" => "holder.js/200x200/auto/vine"}/
+              %h4 Label
+              %span.text-muted Something else
+            .col-xs-6.col-sm-3.placeholder
+              %img.img-responsive{alt: "Generic placeholder thumbnail", "data-src" => "holder.js/200x200/auto/sky"}/
+              %h4 Label
+              %span.text-muted Something else
+            .col-xs-6.col-sm-3.placeholder
+              %img.img-responsive{alt: "Generic placeholder thumbnail", "data-src" => "holder.js/200x200/auto/vine"}/
+              %h4 Label
+              %span.text-muted Something else
+          %h2.sub-header Section title
+          .table-responsive
+            %table.table.table-striped
+              %thead
+                %tr
+                  %th #
+                  %th Header
+                  %th Header
+                  %th Header
+                  %th Header
+              %tbody
+                %tr
+                  %td 1,001
+                  %td Lorem
+                  %td ipsum
+                  %td dolor
+                  %td sit
+                %tr
+                  %td 1,002
+                  %td amet
+                  %td consectetur
+                  %td adipiscing
+                  %td elit
+                %tr
+                  %td 1,003
+                  %td Integer
+                  %td nec
+                  %td odio
+                  %td Praesent
+                %tr
+                  %td 1,003
+                  %td libero
+                  %td Sed
+                  %td cursus
+                  %td ante
+                %tr
+                  %td 1,004
+                  %td dapibus
+                  %td diam
+                  %td Sed
+                  %td nisi
+                %tr
+                  %td 1,005
+                  %td Nulla
+                  %td quis
+                  %td sem
+                  %td at
+                %tr
+                  %td 1,006
+                  %td nibh
+                  %td elementum
+                  %td imperdiet
+                  %td Duis
+                %tr
+                  %td 1,007
+                  %td sagittis
+                  %td ipsum
+                  %td Praesent
+                  %td mauris
+                %tr
+                  %td 1,008
+                  %td Fusce
+                  %td nec
+                  %td tellus
+                  %td sed
+                %tr
+                  %td 1,009
+                  %td augue
+                  %td semper
+                  %td porta
+                  %td Mauris
+                %tr
+                  %td 1,010
+                  %td massa
+                  %td Vestibulum
+                  %td lacinia
+                  %td arcu
+                %tr
+                  %td 1,011
+                  %td eget
+                  %td nulla
+                  %td Class
+                  %td aptent
+                %tr
+                  %td 1,012
+                  %td taciti
+                  %td sociosqu
+                  %td ad
+                  %td litora
+                %tr
+                  %td 1,013
+                  %td torquent
+                  %td per
+                  %td conubia
+                  %td nostra
+                %tr
+                  %td 1,014
+                  %td per
+                  %td inceptos
+                  %td himenaeos
+                  %td Curabitur
+                %tr
+                  %td 1,015
+                  %td sodales
+                  %td ligula
+                  %td in
+                  %td libero
+    /
+      Bootstrap core JavaScript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
+    %script{:src => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}`
