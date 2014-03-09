@@ -1,0 +1,85 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %meta{content: "", name: "description"}/
+    %meta{content: "", name: "author"}/
+    %link{href: "../../assets/ico/favicon.ico", rel: "shortcut icon"}/
+    %title Dashboard Template for Bootstrap
+    / Bootstrap core CSS
+    / Latest compiled and minified CSS
+    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :rel => "stylesheet"}
+    / Optional theme
+    = stylesheet_link_tag "application"
+    / Just for debugging purposes. Don't actually copy this line!
+    /[if lt IE 9] <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "#"} Capacitor
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav.navbar-right
+            - if current_user
+              %li
+                %a{href: "#"} Dashboard
+              %li
+                %a{href: "#"} Services
+              %li
+                %a{href: "#"} Outreach
+              %li
+                %a{href: "/profile"} Profile
+              %li
+                = link_to "#{current_user.email} - Logout", destroy_user_session_path, :method => :delete
+            - else
+              %li
+                %a{href: "/users/sign_in"} Sign In
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          %ul.nav.nav-sidebar
+            %li.active
+              %a{href: "#"} Overview
+            %li
+              %a{href: "#"} Reports
+            %li
+              %a{href: "#"} Analytics
+            %li
+              %a{href: "#"} Export
+          %ul.nav.nav-sidebar
+            %li
+              %a{href: ""} Nav item
+            %li
+              %a{href: ""} Nav item again
+            %li
+              %a{href: ""} One more nav
+            %li
+              %a{href: ""} Another nav item
+            %li
+              %a{href: ""} More navigation
+          %ul.nav.nav-sidebar
+            %li
+              %a{href: ""} Nav item again
+            %li
+              %a{href: ""} One more nav
+            %li
+              %a{href: ""} Another nav item
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          = yield
+    /
+      Bootstrap core JavaScript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
+    %script{:src => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}`
