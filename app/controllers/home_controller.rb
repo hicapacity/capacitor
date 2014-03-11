@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout 'minimal'
+  # layout 'minimal'
   def index
   end
 end
