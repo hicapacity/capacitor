@@ -33,15 +33,11 @@
           %ul.nav.navbar-nav.navbar-right
             - if current_user
               %li
-                %a{href: "#"} Dashboard
-              %li
-                %a{href: "#"} Services
-              %li
-                %a{href: "#"} Outreach
+                %a{href: "/"} Dashboard
               %li
                 %a{href: "/profile"} Profile
               %li
-                = link_to "#{current_user.email} - Logout", destroy_user_session_path, :method => :delete
+                = link_to "Logout #{current_user.email}", destroy_user_session_path, :method => :delete
             - else
               %li
                 %a{href: "/users/sign_in"} Sign In
@@ -52,29 +48,7 @@
             %li.active
               %a{href: "#"} Overview
             %li
-              %a{href: "#"} Reports
-            %li
-              %a{href: "#"} Analytics
-            %li
-              %a{href: "#"} Export
-          %ul.nav.nav-sidebar
-            %li
-              %a{href: ""} Nav item
-            %li
-              %a{href: ""} Nav item again
-            %li
-              %a{href: ""} One more nav
-            %li
-              %a{href: ""} Another nav item
-            %li
-              %a{href: ""} More navigation
-          %ul.nav.nav-sidebar
-            %li
-              %a{href: ""} Nav item again
-            %li
-              %a{href: ""} One more nav
-            %li
-              %a{href: ""} Another nav item
+              %a{href: "http://hicapacity.org"} Main Site
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           = yield
     /
