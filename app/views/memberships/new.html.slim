@@ -1,0 +1,38 @@
+h2 Membership Payment
+form role="form" method="post"
+  .row
+    .col-sm-8
+      h3 Choose a plan:
+      .form-group
+        .radio
+          label
+            input#planOptions checked="checked" name="plan" type="radio" value="1" /
+            | Basic Membership - $60/month
+        .radio
+          label
+            input#planOptions name="plan" type="radio" value="2" /
+            | Premium Membership - $75/month
+  .row
+    .col-sm-8
+      h3 Payment Information
+      .form-group.float-label-control
+        label for="" Cardholder Name
+        input.form-control placeholder="Cardholder Name" type="text" /
+      .form-group.float-label-control
+        label for="" Card Number
+        input.form-control placeholder="Card Number" type="text" /
+      .row
+        .col-sm-5
+          .form-group.float-label-control
+            label for="" Expiration (MM/YY)
+            input.form-control placeholder="Expiration (MM/YY)" type="text" /
+        .col-sm-5           
+          .form-group.float-label-control
+            label for="" CVC
+            input.form-control placeholder="CVC" type="text" /
+  .row
+    .col-sm-8
+      button.btn.btn-primary.btn-lg type="submit"  Submit
+= image_tag('stripe.png',  size: "100x22")
+          
+/ options if already subscribed: cancel, change card, update card
