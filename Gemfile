@@ -12,5 +12,5 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem 'haml-rails', '~> 0.5.3', :group => :development
+gem 'slim-rails', '~> 2.1.5', :group => :development
 
