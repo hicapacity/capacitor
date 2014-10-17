@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require float_label
 //= require scale.fix
+//= require bootstrapValidator.min
+//= require moment
 

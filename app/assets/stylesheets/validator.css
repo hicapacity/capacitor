@@ -1,0 +1,19 @@
+.has-success .form-control { 
+/*  border-color:inherit !important;*/
+  box-shadow: none;  
+}
+
+.has-success .form-control:focus { 
+/*  border-color:inherit !important;*/
+  box-shadow: none;
+}
+
+.has-error .form-control { 
+/*  border-color:inherit !important;*/
+  box-shadow: none;  
+}
+
+.has-error .form-control:focus { 
+/*  border-color:inherit !important;*/
+  box-shadow: none;
+}

@@ -15,6 +15,8 @@ gem 'unicorn'
 gem 'unicorn-rails'
 gem 'mina-unicorn', :require => false
 gem 'slim-rails', '~> 2.1.5'
+gem 'bootstrap-validator-rails'
+gem 'momentjs-rails'
 
 group :development, :test do
   gem 'byebug'

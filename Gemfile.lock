@@ -42,6 +42,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    bootstrap-validator-rails (0.5.2)
+      jquery-rails (>= 3.0)
+      railties (>= 3.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -80,6 +83,8 @@ GEM
     mime-types (2.3)
     mina-unicorn (0.0.4)
     minitest (5.4.1)
+    momentjs-rails (2.8.3)
+      railties (>= 3.1)
     multi_json (1.10.1)
     netrc (0.7.7)
     orm_adapter (0.5.0)
@@ -168,12 +173,20 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+<<<<<<< HEAD
   byebug
+=======
+  bootstrap-validator-rails
+>>>>>>> Ability to accept new stripe subscriptions.
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 2.0)
   jquery-rails
+<<<<<<< HEAD
   mina-unicorn
+=======
+  momentjs-rails
+>>>>>>> Ability to accept new stripe subscriptions.
   pg
   rails (= 4.1.6)
   sass-rails (~> 4.0.3)
