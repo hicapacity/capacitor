@@ -1,6 +1,10 @@
+- if flash[:error]
+  div.alert.alert-danger role="alert"
+    = flash[:error]
+    
 h2 Membership Payment
 
-form#paymentForm action="/memberships" method="post"
+form#paymentForm action="/membership" method="post"
   .col-sm-8
     h3 Choose a plan:
     .form-group

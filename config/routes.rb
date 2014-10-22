@@ -2,6 +2,6 @@ Capacitor::Application.routes.draw do
   devise_for :users
   resource :profile
   resources :charges
-  resources :memberships
+  resource :membership
   root 'home#index'
 end

@@ -1,5 +1,6 @@
 h2 Memberships
 h3 Show
 .main
-  = if current_user
-    Stripe Customer ID: #{current_user.stripe_customer_id}
+  - if current_user
+    | Stripe Customer ID: #{current_user.stripe_customer_id}
+    

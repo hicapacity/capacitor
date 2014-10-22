@@ -1,15 +1,8 @@
 $(document).ready(function() {
-  var bootstrapValidator = 
+  var bootstrapValidator =
   $('#paymentForm').bootstrapValidator({
     message: 'This value is not valid',
     fields: {
-      'plan': {
-        validators: {
-            notEmpty: {
-                message: 'The plan is required'
-            }
-        }
-      },
       cardholderName: {
         message: 'The cardholder name is not valid',
         validators: {
@@ -45,7 +38,7 @@ $(document).ready(function() {
             message: 'Invalid expiration date',
             callback: function (value, validator) {
               var m = new moment(value, 'MM/YY', true);
-              
+
               valid = false;
               if (m.isValid()) {
                 // format is valid
@@ -55,7 +48,7 @@ $(document).ready(function() {
                 }
                 else if (m.year() == now.year()) {
                   valid = m.month() >= now.month()
-                }      
+                }
               }
               return valid;
             }
@@ -67,7 +60,7 @@ $(document).ready(function() {
       }
     }
   });
-  
+
   // this disables success coloring (from the bootstrap validator page)
   bootstrapValidator.on('success.field.bv', function(e, data) {
       // $(e.target)  --> The field element
@@ -83,7 +76,7 @@ $(document).ready(function() {
       // Hide the success icon
       $parent.find('.form-control-feedback[data-bv-icon-for="' + data.field + '"]').hide();
   });
-  
+
   // force validators to run
   bootstrapValidator.bootstrapValidator('validate');
 });
