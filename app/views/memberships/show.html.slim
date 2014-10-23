@@ -1,14 +1,13 @@
-h2 Membership Details
-.main
-  - if current_user
-    / | Stripe Customer ID: #{current_user.stripe_customer_id}
-    - if @plan
-      | Plan: #{@plan.name}
-      br
-      | Rate: $#{@plan.amount/100}/#{@plan.interval}
-      br
-      = button_to "Cancel", {action: "destroy"}, method: :delete, data: {confirm: "Are you sure you want to cancel your membership?"}, class: 'btn btn-danger btn-lg'
-    - else
-      | No active membership
-      br
-      = link_to "Sign Up", new_membership_path, class: 'btn btn-primary btn-lg'
+h1.page-header Membership Details
+- if current_user
+  / | Stripe Customer ID: #{current_user.stripe_customer_id}
+  - if @plan
+    | Plan: #{@plan.name}
+    br
+    | Rate: $#{@plan.amount/100}/#{@plan.interval}
+    br
+    = button_to "Cancel", {action: "destroy"}, method: :delete, data: {confirm: "Are you sure you want to cancel your membership?"}, class: 'btn btn-danger btn-lg'
+  - else
+    | No active membership
+    br
+    = link_to "Sign Up", new_membership_path, class: 'btn btn-primary btn-lg'
