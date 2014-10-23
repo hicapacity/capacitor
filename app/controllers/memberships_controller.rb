@@ -4,7 +4,13 @@ class MembershipsController < ApplicationController
   end
   
   def show
-
+    if (current_user.stripe_customer_id)
+      subscriptions = Stripe::Customer.retrieve(current_user.stripe_customer_id).subscriptions.all(:limit => 1)
+      if (subscriptions.data.any?)
+        subscription = subscriptions.data[0]
+        @plan = subscription.plan
+      end
+    end
   end
   
   def new
@@ -44,7 +50,7 @@ class MembershipsController < ApplicationController
           }
         )
       end
-      render :show
+      redirect_to action: :show
     rescue Stripe::CardError => e
       # Since it's a decline, Stripe::CardError will be caught
       body = e.json_body
@@ -58,7 +64,17 @@ class MembershipsController < ApplicationController
       puts "Message is: #{err[:message]}"
       
       flash.now[:error] = err[:message]
-      render action: 'new'
+      redirect_to action: :new
     end
+  end
+  
+  def destroy
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+    subscriptions = Stripe::Customer.retrieve(current_user.stripe_customer_id).subscriptions.all(:limit => 1)
+    if (subscriptions.data.any?)
+      subscription = subscriptions.data[0]
+      subscription.delete
+    end
+    redirect_to action: :show
   end
 end
