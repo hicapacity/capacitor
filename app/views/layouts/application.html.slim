@@ -28,7 +28,9 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="/"  Capacitor
+          a.navbar-brand href="/"
+            = image_tag('hicap_logo.svg',  size: "40")
+            | CAPACITOR
         .navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             - if current_user
@@ -55,5 +57,6 @@ html lang="en"
       | Bootstrap core JavaScript
       | \==================================================
     /! Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application", params[:controller]
+    = javascript_include_tag :application
+    == yield :controller_js
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" 
