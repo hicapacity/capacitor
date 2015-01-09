@@ -13,4 +13,5 @@ gem 'spring', group: :development
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'slim-rails', '~> 2.1.5', :group => :development
-
+gem 'unicorn'
+gem 'unicorn-rails'
