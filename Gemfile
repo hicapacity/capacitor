@@ -9,9 +9,15 @@ gem 'bootstrap-sass'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'spring', group: :development
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem 'slim-rails', '~> 2.1.5', :group => :development
 gem 'unicorn'
 gem 'unicorn-rails'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
+  gem 'slim-rails', '~> 2.1.5'
+end
+
