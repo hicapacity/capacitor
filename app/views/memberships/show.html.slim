@@ -1,11 +1,15 @@
 h1.page-header Membership Details
 - if current_user
   / | Stripe Customer ID: #{current_user.stripe_customer_id}
-  - if @plan
+  - if @plan_name
     p
-      | Plan: #{@plan.name}
+      | Plan: #{@plan_name}
       br
-      | Rate: $#{@plan.amount/100}/#{@plan.interval}
+      | Rate: $#{@plan_amount}/#{@plan_interval} 
+      
+      - if @coupon_name
+          span class="coupon"
+            | (Coupon code: #{@coupon_name})
       
     = button_to "Cancel", {action: "destroy"}, method: :delete, data: {confirm: "Are you sure you want to cancel your membership?"}, class: 'btn btn-danger btn-lg'
   - else

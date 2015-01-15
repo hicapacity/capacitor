@@ -5,10 +5,31 @@ class MembershipsController < ApplicationController
   
   def show
     if (current_user.stripe_customer_id)
-      subscriptions = Stripe::Customer.retrieve(current_user.stripe_customer_id).subscriptions.all(:limit => 1)
+      @plan_amount = nil;
+      customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+      subscriptions = customer.subscriptions.all(:limit => 1)
       if (subscriptions.data.any?)
         subscription = subscriptions.data[0]
-        @plan = subscription.plan
+        plan = subscription.plan
+        @plan_amount = plan.amount/100
+        @plan_interval = plan.interval
+        @plan_name = plan.name
+        
+        discount = customer.discount
+        if discount
+          coupon = discount.coupon
+          @coupon_name = coupon.id
+          percent_off = coupon.percent_off
+          amount_off = coupon.amount_off / 100
+          
+          puts coupon
+        
+          if percent_off
+            @plan_amount -= @plan_amount * percent_off / 100
+          elsif amount_off
+            @plan_amount -= amount_off
+          end
+        end
       end
     end
   end
@@ -19,10 +40,29 @@ class MembershipsController < ApplicationController
   
   def create
     begin
+      # if they have entered a coupon code, validate it now
+      coupon = nil
+      # customer_info[:coupon] = params[:couponCode] unless params[:couponCode].empty?
+      unless params[:couponCode].empty?
+        begin
+          coupon = Stripe::Coupon.retrieve(params[:couponCode])
+        rescue => e
+          # coupon was invalid
+          
+          body = e.json_body
+          err  = body[:error]
+          
+          flash[:error] = err[:message]
+          redirect_to action: :new
+          return
+        end
+      end
+      
       exp_date = params[:expiration].split('/')
+
       if (current_user.stripe_customer_id == nil)
         # user does not have an existing stripe id, create one
-        customer = Stripe::Customer.create(
+        customer_info = {
           :description => "",
           :card => {
             :number => params[:cardNumber],
@@ -33,12 +73,27 @@ class MembershipsController < ApplicationController
           },
           :email => current_user.email,
           :plan => params[:plan]
-        )
+        }
+        
+        # add coupon code
+        if coupon
+          customer_info[:coupon] = coupon.id
+        end
+        
+        customer = Stripe::Customer.create(customer_info)
+        
         current_user.stripe_customer_id = customer.id
         current_user.save
       else
         # user already had an existing stripe id, just reuse it
         customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+        
+        # set the coupon first so that it applies to the first invoice
+        if coupon
+          customer.coupon = coupon.id
+          customer.save
+        end
+        
         customer.subscriptions.create(
           :plan => params[:plan],
           :card => {
@@ -49,6 +104,7 @@ class MembershipsController < ApplicationController
             :name => params[:cardholderName]
           }
         )
+        
       end
       redirect_to action: :show
     rescue Stripe::CardError => e
@@ -63,7 +119,7 @@ class MembershipsController < ApplicationController
       puts "Param is: #{err[:param]}"
       puts "Message is: #{err[:message]}"
       
-      flash.now[:error] = err[:message]
+      flash[:error] = err[:message]
       redirect_to action: :new
     end
   end
