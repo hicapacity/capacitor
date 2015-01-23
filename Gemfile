@@ -14,11 +14,11 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'unicorn'
 gem 'unicorn-rails'
 gem 'mina-unicorn', :require => false
+gem 'slim-rails', '~> 2.1.5'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'slim-rails', '~> 2.1.5'
 end
 
