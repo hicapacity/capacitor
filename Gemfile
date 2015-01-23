@@ -13,6 +13,7 @@ gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'mina-unicorn', :require => false
 
 group :development, :test do
   gem 'byebug'
