@@ -23,28 +23,28 @@ form#paymentForm action="/membership" method="post"
     h3 Payment Information      
     .form-group.float-label-control
       label Cardholder Name
-      input.form-control name="cardholderName" placeholder="Cardholder Name" type="text" /
+      = text_field_tag "cardholderName", "#{params[:cardholderName]}", placeholder: "Cardholder Name", class:"form-control"
       
     .form-group.float-label-control
       label Card Number
-      input.form-control name="cardNumber" placeholder="Card Number" type="text" /
+      = text_field_tag "cardNumber", "#{params[:cardNumber]}", placeholder: "Card Number", class:"form-control"
       
     .row  
       .col-sm-4
         .form-group.float-label-control
           label Expiration (MM/YY)
-          input.form-control name="expiration" placeholder="Expiration (MM/YY)" type="text" /
+          = text_field_tag "expiration", "#{params[:expiration]}", placeholder: "Expiration (MM/YY)", class:"form-control"          
       
       .col-sm-3
         .form-group.float-label-control
           label CVC
-          input.form-control name="cvc" placeholder="CVC" type="text" /
+          = text_field_tag "cvc", nil, placeholder: "CVC"
           
     .row  
       .col-sm-4
         .form-group.float-label-control
           label Coupon Code*
-          input.form-control name="couponCode" placeholder="Coupon Code*" type="text" /
+          = text_field_tag "couponCode", "#{params[:couponCode]}", placeholder: "Coupon Code*"
     
     .form-group
       button.btn.btn-primary.btn-lg type="submit"  Submit

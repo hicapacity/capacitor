@@ -53,7 +53,7 @@ class MembershipsController < ApplicationController
           err  = body[:error]
           
           flash[:error] = err[:message]
-          redirect_to action: :new
+          render :new
           return
         end
       end
@@ -120,7 +120,7 @@ class MembershipsController < ApplicationController
       puts "Message is: #{err[:message]}"
       
       flash[:error] = err[:message]
-      redirect_to action: :new
+      render :new
     end
   end
   
