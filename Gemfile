@@ -17,10 +17,10 @@ gem 'mina-unicorn', :require => false
 gem 'slim-rails', '~> 2.1.5'
 gem 'bootstrap-validator-rails'
 gem 'momentjs-rails'
+gem 'foreman'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-
