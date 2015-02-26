@@ -3,6 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/unicorn'
+require 'mina/foreman'
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
@@ -30,7 +31,7 @@ set :user, 'deploy'    # Username in the server to SSH to.
 
 set :unicorn_pid, "#{deploy_to}/shared/tmp/pids/unicorn.pid"
 
-set :foreman_sudo, false
+set :foreman_format, 'systemd'
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -63,30 +64,6 @@ task :setup => :environment do
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
 end
 
-desc "foreman start"
-task :foreman_start do
-  queue %{
-    echo "-----> Starting foreman..."
-    #{echo_cmd %[bundle exec foreman start]}
-  }
-end
-
-desc "foreman restart"
-task :foreman_restart do
-  queue %{
-    echo "-----> Retarting foreman..."
-    #{echo_cmd %[bundle exec foreman restart]}
-  }
-end
-
-desc "foreman stop"
-task :foreman_stop do
-  queue %{
-    echo "-----> Stopping foreman..."
-    #{echo_cmd %[bundle exec foreman stop]}
-  }
-end
-
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
@@ -102,7 +79,7 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      invoke :'foreman_restart'
+      invoke :'foreman:restart'
     end
   end
 end
