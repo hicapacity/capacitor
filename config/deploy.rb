@@ -3,7 +3,6 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/unicorn'
-require 'mina/foreman'
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
@@ -31,7 +30,7 @@ set :user, 'deploy'    # Username in the server to SSH to.
 
 set :unicorn_pid, "#{deploy_to}/shared/tmp/pids/unicorn.pid"
 
-set :foreman_format, 'systemd'
+set :foreman_sudo, false
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -64,6 +63,27 @@ task :setup => :environment do
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
 end
 
+desc "Start via systemd"
+task :systemd_start do
+  queue %{
+    #{echo_cmd %[sudo systemctl start capacitor.target]}
+  }
+end
+
+desc "Restart via systemd"
+task :systemd_restart do
+  queue %{
+    #{echo_cmd %[sudo systemctl restart capacitor.target]}
+  }
+end
+
+desc "Stop via systemd"
+task :systemd_stop do
+  queue %{
+    #{echo_cmd %[sudo systemctl stop capacitor.target]}
+  }
+end
+
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
@@ -79,6 +99,7 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      invoke :'systemd_restart'
     end
   end
 end
