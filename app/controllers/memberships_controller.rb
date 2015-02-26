@@ -4,33 +4,43 @@ class MembershipsController < ApplicationController
   end
   
   def show
-    if (current_user.stripe_customer_id)
-      @plan_amount = nil;
-      customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
-      subscriptions = customer.subscriptions.all(:limit => 1)
-      if (subscriptions.data.any?)
-        subscription = subscriptions.data[0]
-        plan = subscription.plan
-        @plan_amount = plan.amount/100
-        @plan_interval = plan.interval
-        @plan_name = plan.name
+    begin
+      if (current_user.stripe_customer_id)
+        @plan_amount = nil;
+        customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+        subscriptions = customer.subscriptions.all(:limit => 1)
+        if (subscriptions.data.any?)
+          subscription = subscriptions.data[0]
+          plan = subscription.plan
+          @plan_amount = plan.amount/100
+          @plan_interval = plan.interval
+          @plan_name = plan.name
         
-        discount = customer.discount
-        if discount
-          coupon = discount.coupon
-          @coupon_name = coupon.id
-          percent_off = coupon.percent_off
-          amount_off = coupon.amount_off / 100
+          discount = customer.discount
+          if discount
+            coupon = discount.coupon
+            @coupon_name = coupon.id
+            percent_off = coupon.percent_off
+            amount_off = coupon.amount_off / 100
           
-          puts coupon
+            puts coupon
         
-          if percent_off
-            @plan_amount -= @plan_amount * percent_off / 100
-          elsif amount_off
-            @plan_amount -= amount_off
+            if percent_off
+              @plan_amount -= @plan_amount * percent_off / 100
+            elsif amount_off
+              @plan_amount -= amount_off
+            end
           end
         end
       end
+    rescue Stripe::InvalidRequestError
+      # Code made a bad call
+      flash[:error] = "An unexpected error occurred. Please notify an administrator."
+      render :new
+    rescue Stripe::ApiError
+      # Stripe servers are having a problem
+      flash[:error] = "Stripe is having an issue. Please try again."
+      render :new
     end
   end
   
@@ -121,7 +131,15 @@ class MembershipsController < ApplicationController
       
       flash[:error] = err[:message]
       render :new
+    rescue Stripe::InvalidRequestError
+      # Code made a bad call
+      flash[:error] = "An unexpected error occurred. Please notify an administrator."
+      render :new
     end
+    rescue Stripe::ApiError
+      # Stripe servers are having a problem
+      flash[:error] = "Stripe is having an issue. Please try again."
+      render :new
   end
   
   def destroy
