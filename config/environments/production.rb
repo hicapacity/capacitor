@@ -77,4 +77,7 @@ Capacitor::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Use Amazon SES for prod
+  config.action_mailer.delivery_method = :ses
 end
