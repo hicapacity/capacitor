@@ -77,5 +77,7 @@ task :deploy => :environment do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
     end
+    
+    invoke :'unicorn:restart'
   end
 end
