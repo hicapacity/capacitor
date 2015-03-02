@@ -19,10 +19,6 @@ gem 'bootstrap-validator-rails'
 gem 'momentjs-rails'
 gem 'foreman'
 
-group :production do
-  gem "aws-ses", "~> 0.6.0", :require => 'aws/ses'
-end
-
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

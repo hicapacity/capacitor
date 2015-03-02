@@ -40,11 +40,6 @@ GEM
     autoprefixer-rails (5.0.0.3)
       execjs
       json
-    aws-ses (0.6.0)
-      builder
-      mail (> 2.2.5)
-      mime-types
-      xml-simple
     bcrypt (3.1.9)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -182,13 +177,11 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    xml-simple (1.1.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-ses (~> 0.6.0)
   bootstrap-sass
   bootstrap-validator-rails
   byebug
