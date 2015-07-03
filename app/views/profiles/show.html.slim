@@ -1,3 +1,12 @@
 h1.page-header Profile
 = image_tag @gravatar_src, class: "gravatar"
-| #{current_user.email}
+
+p First Name: #{current_user.first_name}
+p Last Name: #{current_user.last_name}
+p About Me: #{current_user.blurb}
+p Hobbies: #{current_user.hobbies}
+p Current Projects: #{current_user.projects}
+p Email: #{current_user.email}
+p Preferred Method of Contact: #{current_user.contact}
+
+a href=edit_profile_path(@profile) Edit Your Profile

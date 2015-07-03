@@ -1,0 +1,37 @@
+<%= form_for current_user, url: profile_path(@profile), method: :patch do |f| %>
+
+<p>
+  <%= f.label "First Name" %><br>
+  <%= f.text_field :first_name %>
+</p>
+
+<p>
+  <%= f.label "Last Name"%><br>
+  <%= f.text_field :last_name %>
+</p>
+
+<p>
+  <%= f.label "About Me" %><br>
+  <%= f.text_area :blurb %>
+</p>
+
+<p>
+  <%= f.label "My Hobbies" %><br>
+  <%= f.text_area :hobbies %>
+</p>
+
+<p>
+  <%= f.label "My Projects" %><br>
+  <%= f.text_area :projects %>
+</p>
+
+<p>
+  <%= f.label "Preferred Method of Contact" %><br>
+  <%= f.text_area :contact %>
+</p>
+
+<p>
+  <%= f.submit "Update" %>
+</p>
+
+<% end %>
