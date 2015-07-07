@@ -1,12 +1,49 @@
+
 h1.page-header Profile
 = image_tag @gravatar_src, class: "gravatar"
 
-p First Name: #{current_user.first_name}
-p Last Name: #{current_user.last_name}
-p About Me: #{current_user.blurb}
-p Hobbies: #{current_user.hobbies}
-p Current Projects: #{current_user.projects}
-p Email: #{current_user.email}
-p Preferred Method of Contact: #{current_user.contact}
 
-a href=edit_profile_path(@profile) Edit Your Profile
+p
+<div class="row">
+  <div class="col-md-2"><strong>First Name:</strong></div>
+  <div class="col-md-2">#{@profile.first_name}</div>
+  <div class="col-md-2"><strong>Last Name:</strong></div>
+  <div class="col-md-2">#{@profile.last_name}</div>
+  <div class="col-md-1"><strong>Email:</strong></div>
+  <div class="col-md-3">#{@profile.email}</div>
+</div>
+p
+p
+ <div class="row">
+   <div class="col-md-2"><strong>About Me:</strong></div>
+   <div class="col-md-6">#{@profile.blurb}</div>
+ </div>
+p
+ <div class="row">
+   <div class="col-md-2"><strong>Hobbies:</strong></div>
+   <div class="col-md-6">#{@profile.hobbies}</div>
+ </div>
+
+<div class="row">
+  <div class="col-md-2"><strong>Projects:</strong></div>
+  <div class="col-md-6">#{@profile.projects}</div>
+</div>
+
+p
+p
+<div class="row">
+  <div class="col-md-4"><strong>Preferred Method of Contact:</strong></div>
+  <div class="col-md-4">#{@profile.contact}</div>
+</div>
+p
+<div class="row">
+- if @profile.public
+  <div class="col-md-4"><strong>Privacy Preference:</strong> Viewable to Public</div>
+- else
+  <div class="col-md-4"><strong>Privacy Preference:</strong> Private</div>
+</div>
+
+  = link_to 'Back', profiles_path
+p
+-if current_user and @profile.id == current_user.id
+  = link_to 'Edit Profile', profile_path

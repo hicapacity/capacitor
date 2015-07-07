@@ -1,13 +1,35 @@
 <%= form_for current_user, url: profile_path(@profile), method: :patch do |f| %>
 
+<% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@profile.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @profile.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 <p>
-  <%= f.label "First Name" %><br>
+  <%= f.label "Required Fields*" %><br>
+</p>
+
+<p>
+  <%= f.label "First Name *" %><br>
   <%= f.text_field :first_name %>
 </p>
 
 <p>
-  <%= f.label "Last Name"%><br>
+  <%= f.label "Last Name *"%><br>
   <%= f.text_field :last_name %>
+</p>
+
+<p>
+  <%= f.label "Email" %><br>
+  <%= f.text_field :email %>
 </p>
 
 <p>
@@ -28,6 +50,11 @@
 <p>
   <%= f.label "Preferred Method of Contact" %><br>
   <%= f.text_area :contact %>
+</p>
+
+<p>
+  <%= f.label "Check the box to Make Your Profile Public:" %>
+  <%= f.check_box :public  %>
 </p>
 
 <p>

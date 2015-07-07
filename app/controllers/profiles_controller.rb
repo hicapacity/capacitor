@@ -1,10 +1,20 @@
 class ProfilesController < ApplicationController
+  def index
+    @profiles = User.where(public: true)
+  end
+
+
   def show
     # include MD5 gem, should be part of standard ruby install
     # require 'digest/md5'
-    @profile = current_user
+    if params[:id].nil?
+      @profile = current_user
+    else
+      @profile = User.find(params[:id])
+    end
+
     # get the email from URL-parameters or what have you and make lowercase
-    email_address = current_user.email.downcase
+    email_address = @profile.email.downcase
 
     # create the md5 hash
     hash = Digest::MD5.hexdigest(email_address)
@@ -30,7 +40,7 @@ class ProfilesController < ApplicationController
 
   private
     def profile_params
-      params.require(:user).permit(:first_name, :last_name, :blurb, :hobbies, :projects, :contact)
+      params.require(:user).permit(:first_name, :last_name, :email, :blurb, :hobbies, :projects, :contact, :public)
     end
 
 end
