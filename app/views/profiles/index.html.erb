@@ -1,0 +1,13 @@
+<h1>Current Members</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+  <% @profiles.each do |profile| %>
+    <tr>
+      <td><%= link_to profile.first_name + ' ' + profile.last_name, controller: "profiles", action: "show", id: profile %></td>
+    </tr>
+  <% end %>
+</table>

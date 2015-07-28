@@ -1,3 +1,6 @@
 h1.page-header Dashboard
 - if current_user
-  | Welcome #{current_user.email}
+  | Welcome #{current_user.first_name}
+p
+li
+  a href="/profiles" Meet the Community
